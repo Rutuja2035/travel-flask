@@ -114,16 +114,15 @@ def dashboard():
 @app.route("/home")
 def home():
     if "user" not in session:
-      #  track_visit("Home")
         return redirect("/")
+    track_visit("Home")    
     return render_template("home.html")
 
 @app.route("/features")
 def features():
-    # track_visit("Features")
     if "user" not in session:
         return redirect("/")
-
+    track_visit("Features")
     conn = get_db()
     data = conn.execute("SELECT * FROM places").fetchall()
     conn.close()
@@ -132,7 +131,7 @@ def features():
 
 @app.route("/about", methods=["GET", "POST"])
 def about():
-   # track_visit("About")
+   track_visit("About")
     if request.method == "POST":
         name = request.form["name"]
 
